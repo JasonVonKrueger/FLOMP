@@ -1,0 +1,5 @@
+# ignore authentication config
+auth.js
+
+# modules
+node_modules
