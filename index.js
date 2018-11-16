@@ -54,10 +54,10 @@ function isFlagged(username) {
         searchUser: auth.user.username,
         searchUserPass: auth.user.password,
         ldapjs: {
-            url: 'ldaps://ldap.clayton.edu',
-            searchBase: 'dc=ccsunet,dc=clayton,dc=edu',
+            url: 'ldaps://ldap.domain',
+            searchBase: 'dc=some,dc=path,dc=com',
             scope: 'sub',
-            attributes: ['dn', 'cn', 'sn', 'givenName', 'mail', 'memberOf', 'csuAccountFlagged', 'csuAccountFlaggedReason']
+            attributes: ['dn', 'cn', 'sn', 'givenName', 'mail', 'memberOf', 'AccountFlagged', 'AccountFlaggedReason']
         }
     })
     
@@ -65,9 +65,9 @@ function isFlagged(username) {
         .then(() => {
             return client.findUser(username)
             .then((user) => {
-                if (user.csuAccountFlaggedReason) {
+                if (user.AccountFlaggedReason) {
                     flaggedStatus.isflagged = true
-                    flaggedStatus.flaggedreason = user.csuAccountFlaggedReason
+                    flaggedStatus.flaggedreason = user.AccountFlaggedReason
                     server.logger().info("Compromised account: %s", username) 
                 }   
                 else { flaggedStatus.isflagged = false }   
